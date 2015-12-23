@@ -64,7 +64,7 @@ public class Program
             }
             if(!line.hasOption("in"))
             {
-                System.out.println("[ERROR] Input file not specified!");
+                System.err.println("[ERROR] Input file not specified!");
                 return;
             }
 
@@ -77,7 +77,7 @@ public class Program
         }
         catch (ParseException e)
         {
-            System.out.println("[ERROR] Failed to parse rules file!");
+            System.err.println("[ERROR] Failed to parse rules file!");
         }
     }
 
@@ -102,7 +102,7 @@ public class Program
                 for(String token : arr)
                 {
                     if(token.contains(":"))
-                        token = '<' + token.replace(":", "> ::="); // Encapsulate rules with <RULE>, convert : -> ::=
+                        token = '<' + token.replace(":", "> ::="); // Encapsulate rules with <RULE>; convert : -> ::=
                     if(token.contains("|"))
                         token = '(' + token + ')' + " <WS>"; // Group alternatives together
 
@@ -124,7 +124,7 @@ public class Program
         }
         catch (FileNotFoundException e)
         {
-            System.out.println("[ERROR] Failed to find file: " + pathIn);
+            System.err.println("[ERROR] Failed to find file: " + pathIn);
         }
     }
 
@@ -143,7 +143,7 @@ public class Program
         }
         catch (IOException e)
         {
-            System.out.println("[ERROR] Failed to find file: " + path);
+            System.err.println("[ERROR] Failed to find file: " + path);
         }
     }
 
@@ -160,7 +160,7 @@ public class Program
         }
         catch (IOException e)
         {
-            System.out.println("[ERROR] Failed to find file: " + path);
+            System.err.println("[ERROR] Failed to find file: " + path);
         }
     }
 }
