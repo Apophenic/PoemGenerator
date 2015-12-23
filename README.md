@@ -32,7 +32,7 @@ one example rules.txt made it impossible to extrapolate good regexps (and would 
 # Usage
 Download the project and execute __run.bat__.
 
-If you prefer command line operation:
+If you need command line operation:
 ~~~ shell
 java -jar "../PoemGenerator.jar" -in "../rules.txt"
 ~~~

@@ -1,2 +1,2 @@
-java -jar "C:\Users\Justin\Code Projects\PoemGenerator\jar\PoemGenerator.jar" -in "C:\Users\Justin\Code Projects\PoemGenerator\res\rules.txt"
+java -jar ".\jar\PoemGenerator.jar" -in ".\res\rules.txt"
 pause
