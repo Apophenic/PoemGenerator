@@ -1,7 +1,7 @@
 # Approach
 I immediately saw two ways to approach this problem. The first and most obvious was to parse the rules into a
 hashmap, and store called rules in a stack. This probably would have worked fine (despite possible overcomplexity,
-I'd also need to figure out _how_ to store a "rule" in the hashmap'), but it was breaking one of my cardinal rules:
+I'd also need to figure out _how_ to store a "rule" in the hashmap), but it was breaking one of my cardinal rules:
 never reinvent the wheel unless it's _absolutely necessary_ (which is maybe 5% of the time).
 
 Having worked with BNF grammar in the past, I knew just enough about parsing grammars to realize this ruleset could
@@ -18,21 +18,21 @@ into the code, and a few hours later had figured out what modifications I needed
 gramtest to serve my purpose. See the changes [here](https://github.com/Apophenic/gramtest).
 
 Once that was squared away, all that was needed was to create a basic program that converted the rules list into a BNF
-grammar formatted file and interfaced with my custom gramtest branch. That took a whooping 30 minutes to accomplish.
+grammar formatted file and interfaced with my custom gramtest branch. That took a whole 30 minutes to accomplish.
 
-Compared to the former approach, this seemed like it would be the most scalable. You have an enormous (potentially
-too enormous) amount of potential for working with the grammar because the rules have been parsed with ANTLR, rather
-than just having them sitting haphazardly in a hashmap.
+Compared to the former approach, this seemed like it would be the most scalable solution. You have an enormous
+amount of potential for working with the grammar because the rules have been parsed with
+ANTLR, rather than just having them sitting haphazardly in a hashmap.
 
 The only change I would consider making would be in how I handle parsing the tokens in #generateBNF(). I took the
-"easy way" out by using \s and \n as the delimiter and used basic string manipulation. An arguably more thorough way
-to convert the file would be recognizing tokens by using regular expressions. I decided against this, as having only
+"easy way" out by using \s and \n as the delimiters along with basic string manipulation. An arguably more thorough way
+to convert the file would be separating tokens by using regular expressions. I decided against this, as having only
 one example rules.txt made it impossible to extrapolate good regexps (and would have been overkill).
 
 # Usage
 Download the project and execute __run.bat__.
 
-Command line operation:
+If you prefer command line operation:
 ~~~ shell
 java -jar "../PoemGenerator.jar" -in "../rules.txt"
 ~~~
