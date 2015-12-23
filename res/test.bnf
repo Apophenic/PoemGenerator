@@ -1,0 +1,10 @@
+<POEM> ::= <LINE> <LINE> <LINE> <LINE> <LINE> 
+<LINE> ::= (<NOUN>|<PREPOSITION>|<PRONOUN>) <WS> <LINEBREAK> 
+<ADJECTIVE> ::= (black|white|dark|light|bright|murky|muddy|clear) <WS> (<NOUN>|<ADJECTIVE>|<END>) <WS> 
+<NOUN> ::= (heart|sun|moon|thunder|fire|time|wind|sea|river|flavor|wave|willow|rain|tree|flower|field|meadow|pasture|harvest|water|father|mother|brother|sister) <WS> (<VERB>|<PREPOSITION>|<END>) <WS> 
+<PRONOUN> ::= (my|your|his|her) <WS> (<NOUN>|<ADJECTIVE>) <WS> 
+<VERB> ::= (runs|walks|stands|climbs|crawls|flows|flies|transcends|ascends|descends|sinks) <WS> (<PREPOSITION>|<PRONOUN>|<END>) <WS> 
+<PREPOSITION> ::= (above|across|against|along|among|around|before|behind|beneath|beside|between|beyond|during|inside|onto|outside|under|underneath|upon|with|without|through) <WS> (<NOUN>|<PRONOUN>|<ADJECTIVE>) <WS> 
+<LINEBREAK> ::= _n
+<WS> ::= " "
+<END> ::= 
