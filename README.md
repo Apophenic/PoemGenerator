@@ -24,6 +24,10 @@ Compared to the former approach, this seemed like it would be the most scalable 
 amount of potential for working with the grammar because the rules have been parsed with
 ANTLR, rather than just having them sitting haphazardly in a hashmap.
 
+Speaking of ANTLR, let's acknowledge the elephant in the room. Why didn't I just create a custom grammar using ANTLR?
+Two reasons: one, it would have taken me substantially longer because I would have needed to become more familiar with
+ANTLR. Two, gramtest is designed around a type of BNF grammar only, so I needed grammar that would comply.
+
 The only change I would consider making would be in how I handle parsing the tokens in #generateBNF(). I took the
 "easy way" out by using \s and \n as the delimiters along with basic string manipulation. An arguably more thorough way
 to convert the file would be separating tokens by using regular expressions. I decided against this, as having only
