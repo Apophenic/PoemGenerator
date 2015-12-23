@@ -1,3 +1,28 @@
+//
+//   Accepts custom grammar rules and outputs a poem using said rules.
+//
+//   https://github.com/Apophenic
+//
+//   Copyright (c) 2015 Justin Dayer (jdayer9@gmail.com)
+//
+//   Permission is hereby granted, free of charge, to any person obtaining a copy
+//   of this software and associated documentation files (the "Software"), to deal
+//   in the Software without restriction, including without limitation the rights
+//   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//   copies of the Software, and to permit persons to whom the Software is
+//   furnished to do so, subject to the following conditions:
+//
+//   The above copyright notice and this permission notice shall be included in
+//   all copies or substantial portions of the Software.
+//
+//   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//   THE SOFTWARE.
+
 import com.sourceclear.gramtest.*;
 import org.antlr.v4.runtime.*;
 import org.apache.commons.cli.*;
@@ -7,6 +32,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/** PoemGenerator entry point
+ * <p>
+ * Command line use: java -jar "../PoemGenerator.jar" -in "../rules.txt"
+ * <p>
+ * See README.md for more information
+ */
 public class Program
 {
     public static void main(String[] args)
@@ -50,6 +81,12 @@ public class Program
         }
     }
 
+    /**
+     * Generates a new BNF grammar formatted file to be used
+     * with gramtest from a given rules.txt file
+     * @param pathIn  Literal file path to rules.txt
+     * @param pathOut  Literal file path to save new BNF file
+     */
     public static void generateBNF(String pathIn, String pathOut)
     {
         try
@@ -65,11 +102,11 @@ public class Program
                 for(String token : arr)
                 {
                     if(token.contains(":"))
-                        token = '<' + token.replace(":", "> ::=");
+                        token = '<' + token.replace(":", "> ::="); // Encapsulate rules with <RULE>, convert : -> ::=
                     if(token.contains("|"))
-                        token = '(' + token + ')' + " <WS>";
+                        token = '(' + token + ')' + " <WS>"; // Group alternatives together
 
-                    token = token.replace("$END", "<END>")
+                    token = token.replace("$END", "<END>")  // Convert to proper rule format
                                  .replace("$LINEBREAK", "<LINEBREAK>");
 
                     sb.append(token + " ");
@@ -78,6 +115,7 @@ public class Program
                 sb.append('\n');
             }
 
+            // Assumed rules
             sb.append("<LINEBREAK> ::= _n\n");
             sb.append("<WS> ::= \" \"\n");
             sb.append("<END> ::= ");
@@ -109,6 +147,11 @@ public class Program
         }
     }
 
+    /**
+     * Write BNF formatted rules to file
+     * @param text  String containing BNF rules
+     * @param path  Literal file path to save BNF rules to
+     */
     private static void writeBNF(String text, String path)
     {
         try
