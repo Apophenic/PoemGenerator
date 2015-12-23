@@ -19,14 +19,8 @@ public class Program
                                        .hasArg()
                                        .withDescription("File path to grammatical rules file")
                                        .create("in");
-        Option outOption = OptionBuilder.withType(String.class)
-                                        .withArgName("Output path")
-                                        .hasArg()
-                                        .withDescription("File path to save bnf formatted grammar rules")
-                                        .create("out");
         options.addOption(helpOption);
         options.addOption(inOption);
-        options.addOption(outOption);
 
         try
         {
@@ -35,21 +29,16 @@ public class Program
             if(line.hasOption("help") || line.getOptions().length == 0)
             {
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("gramtest [options]", options);
+                formatter.printHelp("poemgenerator [options]", options);
             }
             if(!line.hasOption("in"))
             {
                 System.out.println("[ERROR] Input file not specified!");
                 return;
             }
-            if(!line.hasOption("out"))
-            {
-                System.out.println("[ERROR] Output file not specified!");
-                return;
-            }
 
             String in = line.getOptionValue("in");
-            String out = line.getOptionValue("out");
+            String out = new File(in).getParent() + "\\grammar.bnf";
 
             generateBNF(in, out);
 
@@ -101,12 +90,11 @@ public class Program
         }
     }
 
-    private static void generatePoemFromBNF(String path)
+    public static void generatePoemFromBNF(String path)
     {
-        bnfLexer lexer = null;
         try
         {
-            lexer = new bnfLexer(new ANTLRFileStream(path));
+            bnfLexer lexer = new bnfLexer(new ANTLRFileStream(path));
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             bnfParser grammarParser = new bnfParser(tokens);
             ParserRuleContext tree = grammarParser.rulelist();
