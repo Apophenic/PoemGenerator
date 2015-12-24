@@ -33,6 +33,8 @@ The only change I would consider making would be in how I handle parsing the tok
 to convert the file would be separating tokens by using regular expressions. I decided against this, as having only
 one example rules.txt made it impossible to extrapolate good regexps (and would have been overkill).
 
+Railroad diagram generated using [this wonderful online tool](http://bottlecaps.de/rr/ui).
+
 # Usage
 Download the project and execute __run.bat__.
 
